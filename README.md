@@ -1,160 +1,58 @@
-# Minimum Spanning Tree Visualizer
+# Visually Stunning MST Visualizer
 
-A comprehensive interactive visualizer for Minimum Spanning Tree (MST) algorithms including **Kruskal's** and **Prim's** algorithms.
+A gorgeous, interactive standalone web application for visualizing Minimum Spanning Tree (MST) algorithms natively in your browser! Featuring **Kruskal's** and **Prim's** algorithms, this visualizer allows you to build custom mathematical graphs and see them elegantly solved in real-time.
+
+Built entirely using pure zero-dependency **HTML**, **CSS**, and **JavaScript**, bypassing the need for heavy frameworks or backend servers.
+
+![mst](/mst_kruskal_demo.webp)
 
 ## 📋 Features
 
+### Custom Interactive Graphs
+- Click on the empty space to spawn nodes with a dynamic pop animation.
+- Select two nodes sequentially to snap an edge between them and set a **custom distance/cost.**
+- Full freedom to design connected components, cyclic clusters, or completely disjoint maps.
+- Safely remove specific nodes or specific edges directly from the UI.
+
 ### Algorithms Implemented
-- **Kruskal's Algorithm** - O(E log E)
-  - Greedy approach using edge sorting
-  - Union-Find data structure for cycle detection
-  
-- **Prim's Algorithm** - O(V²) or O(E log V)
-  - Incremental MST growth from a starting vertex
-  - Min-heap based priority selection
+- **Kruskal's Algorithm**
+  - Sorts explicit custom edge weights incrementally.
+  - Custom JavaScript `Disjoint-Set (Union-Find)` class structurally prevents cycle formations.
+- **Prim's Algorithm**
+  - Fanning logic visually explores the frontier from an origin.
+  - Dynamically builds out the tree node by node.
 
-### Data Structures
-- **Graph** - Adjacency list representation
-- **Union-Find** - Disjoint Set Union with:
-  - Path compression optimization
-  - Union by rank optimization
-
-### Visualization Features
-- Interactive canvas-based graph visualization
-- Step-by-step algorithm execution
-- Color-coded MST edges
-- Real-time weight calculation
-- Auto-play functionality
-- Previous/Next step navigation
+### Vibrant Real-Time Rendering
+- High-fidelity dark mode with neon highlights (Cyan for active exploration, Pink for final paths).
+- Glassmorphism UI panel dynamically tracks stats (number of nodes, active MST cost).
+- Sleek interactive modals built for seamless keyboard inputs.
+- Safe detection for sparse and completely disjoint sub-graphs without crashing.
 
 ## 📁 Project Structure
 
-```
-mst_visualizer/
-├── backend/
-│   ├── app.py                 # Flask application
-│   ├── algorithms/
-│   │   ├── mst.py            # Kruskal's and Prim's algorithms
-│   │   └── __init__.py
-│   └── datastructures/
-│       ├── graph.py           # Graph data structure
-│       ├── union_find.py      # Union-Find implementation
-│       └── __init__.py
-├── frontend/
-│   ├── templates/
-│   │   └── index.html         # Main HTML page
-│   └── static/
-│       ├── style.css          # Styling
-│       └── script.js          # Interactive functionality
-└── requirements.txt           # Python dependencies
+```text
+├── index.html         # Main standalone HTML layout
+├── styles.css         # Animations, Glassmorphism, and styling
+├── script.js          # Core application and Canvas rendering logic
+└── README.md          # Project documentation
 ```
 
-## 🚀 Installation & Running
+## 🚀 Running It Locally
 
-### Prerequisites
-- Python 3.7+
-- pip package manager
+There is **no installation, no Python, and no Node.** 
 
-### Setup
-
-1. Navigate to the project folder:
-```bash
-cd c:\Users\vivek\.p2\Downloads\mst_visualizer
-```
-
-2. Install required dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the Flask application:
-```bash
-python backend/app.py
-```
-
-4. Open your browser and go to:
-```
-http://localhost:5000
-```
+1. Clone or download this repository.
+2. Double-click `index.html` to open it in Chrome, Safari, Edge, or Firefox.
+3. Start creating your graph!
 
 ## 📖 How to Use
 
-### Basic Workflow
-1. Click **"Load Example Graph"** to load a sample graph
-2. Click either **"Run Kruskal's"** or **"Run Prim's"** algorithm button
-3. Use the step controls to navigate through the algorithm execution:
-   - Click **"Next ▶"** to go to the next step
-   - Click **"◀ Previous"** to go to the previous step
-   - Click **"Auto Play"** to automatically play through all steps
-
-### Graph Information
-- Click **"Graph Info"** to see details about the loaded graph
-- View the current MST weight and number of edges
-- See time complexity information for each algorithm
-
-## 🎯 Algorithm Explanations
-
-### Kruskal's Algorithm
-1. Sort all edges by weight in ascending order
-2. Use Union-Find to detect cycles
-3. Iterate through sorted edges:
-   - If adding edge doesn't create a cycle, add it to MST
-   - Otherwise, skip the edge
-4. Continue until MST has V-1 edges
-
-**Time Complexity:** O(E log E) for sorting + O(E α(V)) for Union-Find = O(E log E)
-
-### Prim's Algorithm
-1. Start from an arbitrary vertex
-2. Maintain a set of visited vertices
-3. Use a min-heap to track minimum weight edges
-4. Repeat until all vertices are visited:
-   - Pick the minimum weight edge connecting visited to unvisited vertices
-   - Add the new vertex to visited set
-   - Add all its edges to the heap
-
-**Time Complexity:** O(V²) with array or O(E log V) with min-heap
-
-## 🔧 Customization
-
-You can create custom graphs by modifying the example data or extending the frontend form submission functionality.
-
-## 📚 Design & Analysis Notes
-
-### Union-Find Optimizations
-- **Path Compression:** When finding root, compress the path
-- **Union by Rank:** Attach smaller tree to larger tree
-
-Both optimizations reduce amortized time complexity to nearly O(1) per operation.
-
-### Graph Representations
-- **Adjacency List:** Used for sparse graphs (better space)
-- **Edge List:** Used in Kruskal's for easy sorting
-
-### MST Properties
-- Any connected graph has at least one MST
-- MST has exactly V-1 edges
-- MST is not unique if edge weights are not distinct
-- Total weight of MST is minimum among all spanning trees
-
-## 🎓 Educational Value
-
-This project demonstrates:
-- Greedy algorithm design
-- Graph algorithms and analysis
-- Data structure applications (Union-Find)
-- Algorithm visualization for learning
-- Web-based interactive applications
+1. **Adding Nodes**: Click anywhere empty on the page.
+2. **Selecting**: Click an existing node. It will glow cyan indicating it is selected.
+3. **Connecting**: Click a second node to connect them. A prompt will appear allowing you to enter an explicit cost value.
+4. **Running an Algorithm**: Once you've created a few connected nodes, click either **Run Kruskal's** or **Run Prim's** in the top left panel. 
+5. **Deleting**: You can select a node and hit the `Delete` or `Backspace` key (or use the on-screen menu) to sever the node and all of its connections. Selecting two already-connected nodes will bring up the cost menu where you can click "Delete" to severe the edge itself.
 
 ## 📝 License
 
-Free to use for educational purposes.
-
-## 💡 Future Enhancements
-
-- [ ] Support for directed graphs
-- [ ] Additional algorithms (Borůvka's)
-- [ ] Custom graph input form
-- [ ] Export MST as image/data
-- [ ] Performance benchmarking
-- [ ] Larger graph handling
+Free to use for educational purposes and portfolio building!
